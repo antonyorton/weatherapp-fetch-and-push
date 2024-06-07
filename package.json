@@ -1,0 +1,18 @@
+{
+  "name": "fetch-and-push-data",
+  "version": "1.0.0",
+  "description": "fetch data from external API and push to S3 bucket",
+  "type": "module",
+  "main": "index.mjs",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "index.mjs"
+  },
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "@aws-sdk/client-s3": "^3.592.0",
+    "dotenv": "^16.4.5",
+    "node-fetch": "^3.3.2"
+  }
+}
