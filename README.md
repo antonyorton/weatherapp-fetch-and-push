@@ -2,7 +2,7 @@
 An AWS lambda function setup that can be uploaded to AWS Lambda as a .zip file.  
   
 It has been tested and appears to work.
-## purpose
+## Purpose
 The function:
 * Fetches .json files from an S3 bucket
 * Appends data from weatherapi.com
