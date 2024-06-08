@@ -26,7 +26,7 @@ async function pushToS3(data, objectKey) {
     const command = new PutObjectCommand({
       Bucket: process.env.MY_AWS_BUCKET_NAME,
       Key: objectKey,
-      Body: JSON.stringify(data)
+      Body: JSON.stringify(data, null, 2)
     })
 
     // execute the command
@@ -97,8 +97,8 @@ export default fetchAndPush
 //   setInterval(() => fetchAndPush(city.name), 15000)
 // })
 
-// testing of fetch and push function for city='New York'
-// setInterval(() => fetchAndPush('New York'), 5000)
+// testing of fetch and push function for city='Santiago'
+// fetchAndPush('Santiago')
 
 // //test cityToObjectKey function
 // console.log(cityToObjectKey('Sydney')) //sydney.json
