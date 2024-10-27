@@ -37,16 +37,6 @@ async function pushToS3(data, objectKey) {
   }
 }
 
-//async function to fetch data and then, for a given s3 key, to load, append and push back to S3
-const fetchAndPush = async city => {
-  console.log('updating data for:', city)
-  const objectKey = cityToObjectKey(city)
-  const data = await fetchWeatherData(WEATHERAPI_API_KEY, city)
-  const existingData = await fetchFromS3(objectKey)
-  const updatedData = [...existingData, data]
-  pushToS3(updatedData, objectKey)
-}
-
 //fetch data from S3
 const fetchFromS3 = async objectKey => {
   try {
@@ -63,6 +53,21 @@ const fetchFromS3 = async objectKey => {
     console.error('Error fetching data from S3:', error)
     return []
   }
+}
+
+//async function to fetch data and then, for a given s3 key, to load, append and push back to S3
+const fetchAndPush = async city => {
+  console.log('updating data for:', city)
+  const objectKey = cityToObjectKey(city)
+  const data = await fetchWeatherData(WEATHERAPI_API_KEY, city)
+  const existingData = await fetchFromS3(objectKey)
+
+  // ****** updated 2024-10-27 with specified number of points to keep
+  const number_to_keep = -7 * 24 // must be negative since dates are increasing
+  const updatedData = [...existingData.slice(number_to_keep), data]
+  // ******
+
+  pushToS3(updatedData, objectKey)
 }
 
 //helper function to convert stream to string
